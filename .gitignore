@@ -75,3 +75,5 @@ dmypy.json
 ai_docs/paic-pkb-repomix-output.xml
 
 
+
+**/.claude/settings.local.json
