@@ -80,8 +80,8 @@ The following MCP tools are available in Pocket Pick:
 
 | Tool                 | Description                                  |
 | -------------------- | -------------------------------------------- |
-| `pocket_add`         | Add a new item to your knowledge base        |
-| `pocket_add_file`    | Add a file's content to your knowledge base  |
+| `pocket_add`         | Add a new item with a specified ID to your knowledge base        |
+| `pocket_add_file`    | Add a file's content with a specified ID to your knowledge base  |
 | `pocket_find`        | Find items by text and/or tags               |
 | `pocket_list`        | List all items, optionally filtered by tags  |
 | `pocket_list_tags`   | List all tags with their counts              |
@@ -99,19 +99,19 @@ After setting up Pocket Pick as an MCP server for Claude Code, you can use it yo
 Add items directly
 
 ```bash
-Add "claude mcp list" as a pocket pick item. tags: mcp, claude, code
+Add "claude mcp list" as a pocket pick item with ID "claude-mcp-list". tags: mcp, claude, code
 ```
 
 Add items from clipboard
 
 ```bash
-pbpaste and create a pocket pick item with the following tags: python, algorithm, fibonacci
+pbpaste and create a pocket pick item with ID "python-fib" and the following tags: python, algorithm, fibonacci
 ```
 
 Add items from a file
 
 ```bash
-Add the contents of ~/Documents/code-snippets/fibonacci.py to pocket pick with tags: python, algorithm, fibonacci
+Add the contents of ~/Documents/code-snippets/fibonacci.py to pocket pick with ID "fib-algorithm" and tags: python, algorithm, fibonacci
 ```
 
 ### Listing Items
@@ -159,6 +159,20 @@ The tool requires an absolute file path and will automatically create any necess
 ```
 backup the pocket pick database to ~/Documents/pocket-pick-backup.db
 ```
+
+## ID Management
+
+When adding items to Pocket Pick, you must now provide a unique ID:
+
+- IDs must be unique across your database
+- Choose descriptive IDs that help you identify the content
+- If you attempt to add an item with an ID that already exists, you'll receive an error
+
+### ID Scheme Recommendations
+
+- **Descriptive IDs**: Use meaningful names like `python-sort-algorithm` or `css-flexbox-cheatsheet`
+- **Namespaced IDs**: Use prefixes like `py-`, `js-`, `css-` to categorize items
+- **UUID-style IDs**: Continue using UUIDs if you prefer automatically generated unique identifiers
 
 ## Search Modes
 

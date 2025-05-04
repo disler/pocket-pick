@@ -38,6 +38,7 @@ def temp_backup_path():
 def populated_db(temp_db_path):
     # Add a test item to the database
     command = AddCommand(
+        id="test-backup-item",
         text="Test item for backup",
         tags=["test", "backup"],
         db_path=temp_db_path

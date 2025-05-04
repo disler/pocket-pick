@@ -6,12 +6,14 @@ from .constants import DEFAULT_SQLITE_DATABASE_PATH
 
 
 class AddCommand(BaseModel):
+    id: str
     text: str
     tags: List[str] = []
     db_path: Path = DEFAULT_SQLITE_DATABASE_PATH
 
 
 class AddFileCommand(BaseModel):
+    id: str
     file_path: str
     tags: List[str] = []
     db_path: Path = DEFAULT_SQLITE_DATABASE_PATH

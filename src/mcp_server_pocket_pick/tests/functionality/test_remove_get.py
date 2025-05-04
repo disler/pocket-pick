@@ -25,6 +25,7 @@ def temp_db_path():
 def item_id(temp_db_path):
     # Add a test item and return its ID
     command = AddCommand(
+        id="test-get-remove",
         text="Test item for get and remove",
         tags=["test", "example"],
         db_path=temp_db_path

@@ -25,6 +25,7 @@ def temp_db_path():
 def sample_item(temp_db_path):
     # Add a sample item to the database and return it
     command = AddCommand(
+        id="test-file-output",
         text="This is sample content for testing to_file_by_id function",
         tags=["test", "sample"],
         db_path=temp_db_path

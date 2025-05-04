@@ -14,10 +14,14 @@ def add_file(command: AddFileCommand) -> PocketItem:
     Add a new item to the pocket pick database from a file
     
     Args:
-        command: AddFileCommand with file_path, tags and db_path
+        command: AddFileCommand with id, file_path, tags and db_path
         
     Returns:
         PocketItem: The newly created item
+        
+    Raises:
+        sqlite3.IntegrityError: If an item with the same ID already exists
+        FileNotFoundError: If the specified file doesn't exist
     """
     # Read the file content
     try:
@@ -34,8 +38,8 @@ def add_file(command: AddFileCommand) -> PocketItem:
     # Normalize tags
     normalized_tags = normalize_tags(command.tags)
     
-    # Generate a unique ID
-    item_id = str(uuid.uuid4())
+    # Use the provided ID
+    item_id = command.id
     
     # Get current timestamp
     timestamp = datetime.now()
@@ -48,21 +52,25 @@ def add_file(command: AddFileCommand) -> PocketItem:
         tags_json = json.dumps(normalized_tags)
         
         # Insert item
-        db.execute(
-            "INSERT INTO POCKET_PICK (id, created, text, tags) VALUES (?, ?, ?, ?)",
-            (item_id, timestamp.isoformat(), text, tags_json)
-        )
-        
-        # Commit transaction
-        db.commit()
-        
-        # Return created item
-        return PocketItem(
-            id=item_id,
-            created=timestamp,
-            text=text,
-            tags=normalized_tags
-        )
+        try:
+            db.execute(
+                "INSERT INTO POCKET_PICK (id, created, text, tags) VALUES (?, ?, ?, ?)",
+                (item_id, timestamp.isoformat(), text, tags_json)
+            )
+            
+            # Commit transaction
+            db.commit()
+            
+            # Return created item
+            return PocketItem(
+                id=item_id,
+                created=timestamp,
+                text=text,
+                tags=normalized_tags
+            )
+        except sqlite3.IntegrityError:
+            logger.error(f"Item with ID {item_id} already exists")
+            raise sqlite3.IntegrityError(f"Item with ID {item_id} already exists")
     except Exception as e:
         logger.error(f"Error adding item from file: {e}")
         raise

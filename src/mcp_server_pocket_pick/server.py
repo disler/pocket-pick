@@ -39,11 +39,13 @@ from .modules.constants import DEFAULT_SQLITE_DATABASE_PATH
 logger = logging.getLogger(__name__)
 
 class PocketAdd(BaseModel):
+    id: str
     text: str
     tags: List[str] = []
     db: str = str(DEFAULT_SQLITE_DATABASE_PATH)
 
 class PocketAddFile(BaseModel):
+    id: str
     file_path: str
     tags: List[str] = []
     db: str = str(DEFAULT_SQLITE_DATABASE_PATH)
@@ -177,6 +179,7 @@ async def serve(sqlite_database: Path | None = None) -> None:
         match name:
             case PocketTools.ADD:
                 command = AddCommand(
+                    id=arguments["id"],
                     text=arguments["text"],
                     tags=arguments.get("tags", []),
                     db_path=db_path
@@ -189,6 +192,7 @@ async def serve(sqlite_database: Path | None = None) -> None:
             
             case PocketTools.ADD_FILE:
                 command = AddFileCommand(
+                    id=arguments["id"],
                     file_path=arguments["file_path"],
                     tags=arguments.get("tags", []),
                     db_path=db_path

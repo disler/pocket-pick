@@ -23,16 +23,17 @@ def temp_db_path():
 def populated_db(temp_db_path):
     # Create sample items
     items = [
-        {"text": "Python programming is fun", "tags": ["python", "programming", "fun"]},
-        {"text": "SQL databases are powerful", "tags": ["sql", "database", "programming"]},
-        {"text": "Testing code is important", "tags": ["testing", "code", "programming"]},
-        {"text": "Regular expressions can be complex", "tags": ["regex", "programming", "advanced"]},
-        {"text": "Learning new technologies is exciting", "tags": ["learning", "technology", "fun"]}
+        {"id": "python-1", "text": "Python programming is fun", "tags": ["python", "programming", "fun"]},
+        {"id": "sql-1", "text": "SQL databases are powerful", "tags": ["sql", "database", "programming"]},
+        {"id": "testing-1", "text": "Testing code is important", "tags": ["testing", "code", "programming"]},
+        {"id": "regex-1", "text": "Regular expressions can be complex", "tags": ["regex", "programming", "advanced"]},
+        {"id": "learning-1", "text": "Learning new technologies is exciting", "tags": ["learning", "technology", "fun"]}
     ]
     
     # Add items to the database
     for item in items:
         command = AddCommand(
+            id=item["id"],
             text=item["text"],
             tags=item["tags"],
             db_path=temp_db_path

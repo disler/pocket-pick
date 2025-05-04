@@ -27,16 +27,17 @@ def temp_db_path():
 def populated_db(temp_db_path):
     # Create sample items
     items = [
-        {"text": "Python programming is fun", "tags": ["python", "programming", "fun"]},
-        {"text": "SQL databases are powerful", "tags": ["sql", "database", "programming"]},
-        {"text": "Testing code is important", "tags": ["testing", "code", "programming"]},
-        {"text": "Regular expressions can be complex", "tags": ["regex", "programming", "advanced"]},
-        {"text": "Learning new technologies is exciting", "tags": ["learning", "technology", "fun"]}
+        {"id": "python-1", "text": "Python programming is fun", "tags": ["python", "programming", "fun"]},
+        {"id": "sql-1", "text": "SQL databases are powerful", "tags": ["sql", "database", "programming"]},
+        {"id": "testing-1", "text": "Testing code is important", "tags": ["testing", "code", "programming"]},
+        {"id": "regex-1", "text": "Regular expressions can be complex", "tags": ["regex", "programming", "advanced"]},
+        {"id": "learning-1", "text": "Learning new technologies is exciting", "tags": ["learning", "technology", "fun"]}
     ]
     
     # Add items to the database
     for item in items:
         command = AddCommand(
+            id=item["id"],
             text=item["text"],
             tags=item["tags"],
             db_path=temp_db_path
@@ -133,6 +134,7 @@ def test_find_fts_exact_phrase(populated_db):
     """
     # First make sure we have a known item with a specific phrase
     command = AddCommand(
+        id="test-exact-phrase-1",
         text="This contains programming fun as a phrase",
         tags=["test", "phrase"],
         db_path=populated_db
@@ -141,6 +143,7 @@ def test_find_fts_exact_phrase(populated_db):
     
     # Add an item with same words but in reverse order
     command = AddCommand(
+        id="test-exact-phrase-2",
         text="This has fun programming in reverse order",
         tags=["test", "reverse"],
         db_path=populated_db

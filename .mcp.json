@@ -1,0 +1,15 @@
+{
+  "mcpServers": {
+    "updated-pocket-pick": {
+      "command": "uv",
+      "args": [
+        "--directory",
+        ".",
+        "run",
+        "mcp-server-pocket-pick",
+        "--database",
+        "./database.db"
+      ]
+    }
+  }
+}
