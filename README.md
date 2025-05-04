@@ -51,6 +51,36 @@ Custom Database for Claude Code
 
 ## Usage with Claude Code
 
+### Using .mcp.json
+
+You can configure Pocket Pick in your project's `.mcp.json` file for easy integration with Claude Code:
+
+```json
+{
+  "servers": {
+    "pocket-pick": {
+      "command": "uv",
+      "args": ["--directory", "/path/to/pocket-pick", "run", "mcp-server-pocket-pick"]
+    }
+  }
+}
+```
+
+With custom database location:
+
+```json
+{
+  "servers": {
+    "pocket-pick": {
+      "command": "uv",
+      "args": ["--directory", "/path/to/pocket-pick", "run", "mcp-server-pocket-pick", "--database", "./custom-database.db"]
+    }
+  }
+}
+```
+
+Place this file in your project directory, and Claude Code will automatically detect and use the configured MCP servers when started in that directory.
+
 ```bash
 # Add the pocket-pick server to Claude Code (if you're in the directory)
 claude mcp add pocket-pick -- \
