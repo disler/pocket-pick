@@ -103,7 +103,33 @@ claude mcp list
 # Start claude code
 claude
 ```
+## Usage with other coding agents (windsurf, cursor etc)
 
+Example MCP Server s JSON:
+
+```json
+{
+  "mcpServers": {
+    "pocket-pick": {
+      "command": "uv",
+      "args": [
+        "--directory",
+        "/path/to/pocket-pick-codebase",
+        "run",
+        "mcp-server-pocket-pick",
+        "--database",
+        "/path/to/pocket-pick-codebase/database.db"
+      ],
+      "options": {
+        "cwd": "/path/to/pocket-pick-codebase"
+      },
+      "env": {
+        "LOG_LEVEL": "info"
+      }
+    }
+  }
+}
+```
 ## Pocket Pick MCP Tools
 
 The following MCP tools are available in Pocket Pick:
