@@ -1,3 +1,5 @@
+[![MseeP.ai Security Assessment Badge](https://mseep.net/pr/disler-pocket-pick-badge.png)](https://mseep.ai/app/disler-pocket-pick)
+
 # Pocket Pick (MCP Server)
 > See how we used AI Coding, Claude Code, and MCP to build this tool on the [@IndyDevDan youtube channel](https://youtu.be/d-SyGA0Avtw).
 
