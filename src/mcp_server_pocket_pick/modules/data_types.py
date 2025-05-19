@@ -65,3 +65,9 @@ class PocketItem(BaseModel):
     created: datetime
     text: str
     tags: List[str]
+
+
+class ListIdsCommand(BaseModel):
+    tags: List[str] = []
+    limit: int = 100
+    db_path: Path = DEFAULT_SQLITE_DATABASE_PATH

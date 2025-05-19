@@ -20,6 +20,7 @@ from .modules.data_types import (
     FindCommand, 
     ListCommand,
     ListTagsCommand,
+    ListIdsCommand,
     RemoveCommand,
     GetCommand,
     BackupCommand,
@@ -30,6 +31,7 @@ from .modules.functionality.add_file import add_file
 from .modules.functionality.find import find
 from .modules.functionality.list import list_items
 from .modules.functionality.list_tags import list_tags
+from .modules.functionality.list_ids import list_ids
 from .modules.functionality.remove import remove
 from .modules.functionality.get import get
 from .modules.functionality.backup import backup
@@ -67,6 +69,11 @@ class PocketListTags(BaseModel):
     limit: int = 1000
     db: str = str(DEFAULT_SQLITE_DATABASE_PATH)
 
+class PocketListIds(BaseModel):
+    tags: List[str] = []
+    limit: int = 100
+    db: str = str(DEFAULT_SQLITE_DATABASE_PATH)
+
 class PocketRemove(BaseModel):
     id: str
     db: str = str(DEFAULT_SQLITE_DATABASE_PATH)
@@ -90,6 +97,7 @@ class PocketTools(str, Enum):
     FIND = "pocket_find"
     LIST = "pocket_list"
     LIST_TAGS = "pocket_list_tags"
+    LIST_IDS = "pocket_list_ids"
     REMOVE = "pocket_remove"
     GET = "pocket_get"
     BACKUP = "pocket_backup"
@@ -137,6 +145,11 @@ async def serve(sqlite_database: Path | None = None) -> None:
                 name=PocketTools.LIST_TAGS,
                 description="List all tags in your pocket pick database with their counts",
                 inputSchema=PocketListTags.schema(),
+            ),
+            Tool(
+                name=PocketTools.LIST_IDS,
+                description="List all item IDs in your pocket pick database, optionally filtered by tags",
+                inputSchema=PocketListIds.schema(),
             ),
             Tool(
                 name=PocketTools.REMOVE,
@@ -284,6 +297,25 @@ async def serve(sqlite_database: Path | None = None) -> None:
                 return [TextContent(
                     type="text",
                     text="\n".join(output)
+                )]
+
+            case PocketTools.LIST_IDS:
+                command = ListIdsCommand(
+                    tags=arguments.get("tags", []),
+                    limit=arguments.get("limit", 100),
+                    db_path=db_path
+                )
+                results = list_ids(command)
+
+                if not results:
+                    return [TextContent(
+                        type="text",
+                        text="No item IDs found."
+                    )]
+
+                return [TextContent(
+                    type="text",
+                    text="\n".join(results)
                 )]
             
             case PocketTools.REMOVE:
