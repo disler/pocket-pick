@@ -22,7 +22,7 @@ Install [uv](https://docs.astral.sh/uv/getting-started/installation/)
 
 ```bash
 # Clone the repository
-git clone https://github.com/indydevdan/pocket-pick.git
+git clone https://github.com/disler/pocket-pick.git
 cd pocket-pick
 
 # Install dependencies
