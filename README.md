@@ -3,9 +3,9 @@
 
 As engineers we end up reusing ideas, patterns and code snippets all the time but keeping track of these snippets can be hard and remembering where you stored them can be even harder. What if the exact snippet or idea you were looking for was one prompt away?
 
-With Anthropic's new MCP (Model Context Protocol) and a minimal portable database layer - we can solve this problem. Pocket Pick is your personal engineering knowledge base that lets you quickly store ideas, patterns and code snippets and gives you a DEAD SIMPLE text or tag based searching to quickly find them in the future.
+With Anthropic's new MCP (Model Context Protocol) and a minimal portable database layer - we can solve this problem. Pocket Pick is your personal engineering knowledge base that lets you quickly store ideas, patterns, and code snippets and gives you a DEAD SIMPLE text or tag-based searching to quickly find them in the future.
 
-<img src="./images/pocket-pick.png" alt="Pocket Pick" style="max-width: 600px;">
+![Pocket Pick](./images/pocket-pick.png)
 
 ## Features
 
@@ -18,11 +18,11 @@ With Anthropic's new MCP (Model Context Protocol) and a minimal portable databas
 
 ## Installation
 
-Install [uv](https://docs.astral.sh/uv/getting-started/installation/)
+Install [uv](https://docs.astral.sh/uv/getting-started/installation/), a fast Python package manager and runner.
 
 ```bash
 # Clone the repository
-git clone https://github.com/indydevdan/pocket-pick.git
+git clone https://github.com/disler/pocket-pick.git
 cd pocket-pick
 
 # Install dependencies
@@ -122,7 +122,7 @@ The following MCP tools are available in Pocket Pick:
 
 ## Using with Claude
 
-After setting up Pocket Pick as an MCP server for Claude Code, you can use it your conversations:
+After setting up Pocket Pick as an MCP server for Claude Code, you can use it in your conversations:
 
 ### Adding Items
 
